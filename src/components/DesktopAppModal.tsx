@@ -66,11 +66,35 @@ export const DesktopAppModal: React.FC<DesktopAppModalProps> = ({ isOpen, onClos
           <div className="p-4 bg-sky-50/70 dark:bg-sky-950/30 border border-sky-200 dark:border-sky-800/60 rounded-xl space-y-1.5">
             <div className="flex items-center gap-2 text-sky-900 dark:text-sky-200 font-semibold text-sm">
               <Sparkles className="w-4 h-4 text-sky-500" />
-              <span>是的！MoA Studio 完全可以作為您 PC 上的本地端 APP 使用</span>
+              <span>如何下載本專案？是否需連動到 GITHUB？</span>
             </div>
             <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
-              本工作台已經具備標準 <strong>PWA 桌面安裝規範</strong>、<strong>本地 Node.js / Express 離線引擎</strong> 以及 <strong>Electron 原生封裝支援</strong>。您可以依據使用習慣選擇以下 3 種方式運行：
+              <strong>完全不需要連動 GitHub！</strong> 您可以直接點擊下方按鈕，一秒將完整專案源碼打包下載為 <code className="text-sky-600 dark:text-sky-400 font-mono font-semibold">.ZIP</code> 壓縮檔至您的電腦硬碟中。若您後續有版本控制需求，才選擇性連動 GitHub 即可。
             </p>
+          </div>
+
+          {/* Direct Download ZIP Button Card */}
+          <div className="p-4 bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-transparent border border-sky-300 dark:border-sky-800 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <Package className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                <h4 className="font-semibold text-slate-900 dark:text-white text-xs">
+                  一鍵打包下載完整專案源碼包 (ZIP)
+                </h4>
+              </div>
+              <p className="text-[11px] text-slate-500">
+                內含全部前後端原始碼、MoA 拓撲配置、Skill 規範、本地啟動批次檔及 CLI 工具。
+              </p>
+            </div>
+
+            <a
+              href="/api/project/download-zip"
+              download="moa-studio-complete.zip"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg font-medium shadow-sm transition-colors text-xs whitespace-nowrap cursor-pointer shrink-0"
+            >
+              <Download className="w-4 h-4" />
+              <span>直接下載專案 (.ZIP)</span>
+            </a>
           </div>
 
           {/* Option 1: PWA Desktop Install */}
@@ -182,6 +206,17 @@ export const DesktopAppModal: React.FC<DesktopAppModalProps> = ({ isOpen, onClos
                 {copiedCmd === 'electron' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-slate-400" />}
               </button>
             </div>
+          </div>
+
+          {/* Optional GitHub Sync Guide */}
+          <div className="p-3.5 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-xl space-y-1 text-slate-600 dark:text-slate-400">
+            <div className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5 text-xs">
+              <span>💡 若您未來想要連動到 GITHUB（選用）：</span>
+            </div>
+            <p className="text-[11px] leading-relaxed">
+              1. <strong>AI Studio 介面連動</strong>：在 Google AI Studio 畫面右上角點選 <strong>「Export」➔「Push to GitHub」</strong>，即可將本專案直接建立為您 GitHub 帳號下的 Repository。<br />
+              2. <strong>本地 Git 連動</strong>：下載 ZIP 解壓縮後，在目錄內執行 <code className="font-mono text-sky-500">git init && git remote add origin &lt;您的儲存庫網址&gt;</code> 即可隨時推送版本。
+            </p>
           </div>
 
           {/* Privacy & File Persistence Note */}

@@ -609,6 +609,37 @@ app.delete('/api/workspace/files/:filename', (req: Request, res: Response) => {
   }
 });
 
+// 5. One-click Download Entire Project as ZIP
+app.get('/api/project/download-zip', (req: Request, res: Response) => {
+  try {
+    const zipPath = path.join('/tmp', `moa-studio-project-${Date.now()}.zip`);
+    const script = `
+import zipfile, os
+zip_path = r"${zipPath}"
+with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+    for root, dirs, files in os.walk('.'):
+        dirs[:] = [d for d in dirs if d not in ['node_modules', '.git', 'dist', '.cache', '__pycache__']]
+        for file in files:
+            full_path = os.path.join(root, file)
+            arcname = os.path.relpath(full_path, '.')
+            zipf.write(full_path, arcname)
+`;
+    const tmpScript = path.join('/tmp', `mkzip_${Date.now()}.py`);
+    fs.writeFileSync(tmpScript, script, 'utf-8');
+    exec(`python3 "${tmpScript}"`, (err) => {
+      try { fs.unlinkSync(tmpScript); } catch (_) {}
+      if (err) {
+        return res.status(500).json({ error: '打包專案失敗: ' + err.message });
+      }
+      res.download(zipPath, 'moa-studio-complete.zip', (downloadErr) => {
+        try { fs.unlinkSync(zipPath); } catch (_) {}
+      });
+    });
+  } catch (err: any) {
+    res.status(500).json({ error: '打包失敗: ' + err.message });
+  }
+});
+
 // Vite middleware in dev or static serving in production
 async function startServer() {
   const isProd = process.env.NODE_ENV === 'production';
