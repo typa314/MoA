@@ -92,16 +92,6 @@ export const WorkspaceManager: React.FC<WorkspaceManagerProps> = ({
           </div>
 
           <div className="flex items-center gap-2">
-            <a
-              href="/api/project/download-zip"
-              download="moa-studio-complete.zip"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-sky-50 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 hover:text-sky-900 dark:hover:text-white border border-sky-200 dark:border-sky-800 rounded-md transition-colors cursor-pointer"
-              title="下載包含前後端程式碼、啟動腳本與工作區的完整 ZIP 壓縮檔"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>下載完整專案源碼 (.ZIP)</span>
-            </a>
-
             <button
               type="button"
               onClick={onRefresh}

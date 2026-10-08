@@ -1,5 +1,5 @@
 import React from 'react';
-import { Key, Plus, Sparkles, FolderDown, Cpu, ShieldCheck, Terminal, Monitor } from 'lucide-react';
+import { Key, Plus } from 'lucide-react';
 
 export type ActiveTab = 'console' | 'topology' | 'skills' | 'workspace';
 
@@ -7,8 +7,6 @@ interface TopNavProps {
   activeTab: ActiveTab;
   onTabChange: (tab: ActiveTab) => void;
   onOpenKeyModal: () => void;
-  onOpenCliModal: () => void;
-  onOpenDesktopModal: () => void;
   onNewTask: () => void;
   hasGeminiKey: boolean;
   workspaceFileCount: number;
@@ -18,8 +16,6 @@ export const TopNav: React.FC<TopNavProps> = ({
   activeTab,
   onTabChange,
   onOpenKeyModal,
-  onOpenCliModal,
-  onOpenDesktopModal,
   onNewTask,
   hasGeminiKey,
   workspaceFileCount,
@@ -43,7 +39,7 @@ export const TopNav: React.FC<TopNavProps> = ({
             <span>MoA Studio</span>
           </a>
           <span className="hidden sm:inline text-xs text-slate-400 font-normal">
-            Mixture of Agents Portal
+            Mixture of Agents
           </span>
         </div>
 
@@ -100,28 +96,8 @@ export const TopNav: React.FC<TopNavProps> = ({
           </button>
         </nav>
 
-        {/* Zone 3: 1-2 primary actions */}
+        {/* Zone 3: Primary utility actions */}
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={onOpenDesktopModal}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-sky-700 dark:text-sky-300 hover:text-sky-900 dark:hover:text-white bg-sky-50 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800 rounded-md transition-colors cursor-pointer whitespace-nowrap"
-            title="安裝為桌面獨立 App 或查看本機部署"
-          >
-            <Monitor className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
-            <span className="hidden md:inline">桌面 APP</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={onOpenCliModal}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-300 hover:text-emerald-900 dark:hover:text-white bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 rounded-md transition-colors cursor-pointer whitespace-nowrap"
-            title="查看 PC 端 CLI 呼叫指南與腳本"
-          >
-            <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-            <span className="hidden md:inline">CLI 終端</span>
-          </button>
-
           <button
             type="button"
             onClick={onOpenKeyModal}
@@ -129,11 +105,11 @@ export const TopNav: React.FC<TopNavProps> = ({
             title="設置與檢查 API Key"
           >
             <Key className="w-3.5 h-3.5 text-slate-500" />
-            <span className="hidden md:inline">金鑰管理</span>
+            <span className="hidden sm:inline">金鑰管理</span>
             {hasGeminiKey ? (
-              <span className="w-2 h-2 rounded-full bg-emerald-500" title="Gemini 服務就緒" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500" title="服務就緒" />
             ) : (
-              <span className="w-2 h-2 rounded-full bg-amber-500" title="未偵測到預設金鑰" />
+              <span className="w-2 h-2 rounded-full bg-amber-500" title="自訂金鑰模式" />
             )}
           </button>
 

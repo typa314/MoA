@@ -168,18 +168,6 @@ export const KeyManagerModal: React.FC<KeyManagerModalProps> = ({
             </div>
           </div>
 
-          {/* Direct CLI Runner Guidance */}
-          <div className="p-3 bg-indigo-50/60 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/60 rounded-lg space-y-1.5 text-xs">
-            <div className="flex items-center gap-1.5 font-semibold text-indigo-900 dark:text-indigo-300">
-              <Laptop className="w-3.5 h-3.5 text-indigo-500" />
-              <span>不想使用付費 API Key？可直接呼叫本地 CLI！</span>
-            </div>
-            <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
-              1. <strong>工作台內調用</strong>：在「架構拓撲」編輯任一 Agent，供應商選擇<strong>「本地 CLI 命令行」</strong>，即可填入如 <code className="px-1 py-0.2 bg-white dark:bg-slate-900 rounded font-mono text-indigo-600 dark:text-indigo-400">ollama run llama3 "{'{prompt}'}"</code> 或 <code className="px-1 py-0.2 bg-white dark:bg-slate-900 rounded font-mono text-indigo-600 dark:text-indigo-400">claude -p "{'{prompt}'}"</code> 執行。<br />
-              2. <strong>PC 終端機直接執行</strong>：本專案已生成獨立腳本 <code className="px-1 py-0.2 bg-white dark:bg-slate-900 rounded font-mono text-indigo-600 dark:text-indigo-400">python3 moa_cli.py</code>，可在本機終端機直接呼叫並自動產生 Markdown 存檔。
-            </p>
-          </div>
-
           {/* Local Security Assurance */}
           <div className="flex items-center gap-2 text-[11px] text-slate-500">
             <Shield className="w-3.5 h-3.5 text-emerald-500 shrink-0" />

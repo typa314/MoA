@@ -660,9 +660,21 @@ async function startServer() {
     }
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`MoA Studio server listening on http://0.0.0.0:${PORT}`);
-  });
+  function listenWithFallback(port: number) {
+    const server = app.listen(port, '0.0.0.0', () => {
+      console.log(`MoA Studio server listening on http://localhost:${port}`);
+    });
+    server.on('error', (err: any) => {
+      if (err.code === 'EADDRINUSE') {
+        console.warn(`[Port Conflict] 連接埠 ${port} 已被其他程式占用，正在自動切換至 ${port + 1}...`);
+        listenWithFallback(port + 1);
+      } else {
+        console.error('Server error:', err);
+      }
+    });
+  }
+
+  listenWithFallback(PORT);
 }
 
 startServer();

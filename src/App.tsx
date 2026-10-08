@@ -32,8 +32,6 @@ import { WorkspaceManager } from './components/WorkspaceManager';
 import { MoAResultsView } from './components/MoAResultsView';
 import { KeyManagerModal } from './components/KeyManagerModal';
 import { AgentEditModal } from './components/AgentEditModal';
-import { CliModal } from './components/CliModal';
-import { DesktopAppModal } from './components/DesktopAppModal';
 import { Sparkles, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 const STORAGE_KEY_AGENTS = 'moa_agents_config_v1';
@@ -95,8 +93,6 @@ export default function App() {
 
   // Modals
   const [isKeyModalOpen, setIsKeyModalOpen] = useState(false);
-  const [isCliModalOpen, setIsCliModalOpen] = useState(false);
-  const [isDesktopModalOpen, setIsDesktopModalOpen] = useState(false);
   const [editingAgent, setEditingAgent] = useState<AgentConfig | null>(null);
 
   // Persist agents
@@ -420,8 +416,6 @@ ${judgeRes.content}
         activeTab={activeTab}
         onTabChange={setActiveTab}
         onOpenKeyModal={() => setIsKeyModalOpen(true)}
-        onOpenCliModal={() => setIsCliModalOpen(true)}
-        onOpenDesktopModal={() => setIsDesktopModalOpen(true)}
         onNewTask={handleNewTask}
         hasGeminiKey={hasGeminiKey}
         workspaceFileCount={workspaceFiles.length}
@@ -526,18 +520,6 @@ ${judgeRes.content}
         apiKeys={apiKeys}
         onSaveKeys={setApiKeys}
         hasServerGeminiKey={hasGeminiKey}
-      />
-
-      {/* CLI Hub Modal */}
-      <CliModal
-        isOpen={isCliModalOpen}
-        onClose={() => setIsCliModalOpen(false)}
-      />
-
-      {/* Desktop App Modal */}
-      <DesktopAppModal
-        isOpen={isDesktopModalOpen}
-        onClose={() => setIsDesktopModalOpen(false)}
       />
 
       {/* Agent Edit Modal */}
